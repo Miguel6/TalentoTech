@@ -5,14 +5,6 @@
     flex-direction: row;
 }
 
-@media (max-width: 1024px) {
-    #contactus {
-        display: flex;
-        flex-direction: column;
-    }
-}
-
-
 #contactus .location, #contactus .contact-form {
     display: flex;
     flex-direction: column;
@@ -58,4 +50,19 @@
 .contact-form button:hover {
     background-color: var(--main-color-light);
     transition: background-color 250ms linear;
+}
+
+@media (max-width: 1024px) {
+    #contactus {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #contactus .contact-form form {
+        width: 100%;
+    }
+
+    #contactus .contact-form {
+        width: 75%;
+    }
 }
