@@ -1,0 +1,61 @@
+@import "colors.css";
+
+#contactus {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 1024px) {
+    #contactus {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+#contactus .location, #contactus .contact-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+#contactus .contact-form form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    row-gap: 10px;
+    margin-top: 20px;
+
+}
+
+#contactus .contact-form form input, #contactus .contact-form form textarea {
+    width: 100%;
+    font-size: 15px;
+}
+
+#contactus .contact-form form input {
+    height: 30px;
+}
+
+#contactus .contact-form form textarea {
+    height: 100px;
+}
+
+.contact-form button {
+    width: 125px;
+    height: 50px;
+    border: 0;
+    color: var(--white);
+    font-weight: bold;
+    background-color: var(--main-color);
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: var(--main-color-light);
+    transition: background-color 250ms linear;
+}
