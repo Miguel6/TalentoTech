@@ -2,4 +2,7 @@
     --white: #FFFFFF;
     --main-color: #f44336;
     --main-color-light: #f56e64;
+    --black: #000000;
+    --white-hover: rgba(255, 255, 255, 0.5);
+    --dot-background-color: #bbb;
 }

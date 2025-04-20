@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script src="./scripts/main.js"></script>
     <link rel="stylesheet" type="text/css" href="./styles/general.css">
     <link rel="stylesheet" type="text/css" href="./styles/contact-us.css">
     <link rel="stylesheet" type="text/css" href="./styles/colors.css">
@@ -26,8 +27,36 @@
 
 <main>
     <section id="home">
-        <h2>Welcome</h2>
-        <p>Main Page</p>
+        <span class="slider-container">
+            <div class="mySlides fade">
+                <img src="images/slideshow/slideshow-1.jpg" style="width:100%">
+                <div class="text">Caption Text</div>
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/slideshow/slideshow-2.jpg" style="width:100%">
+                <div class="text">Caption Two</div>
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/slideshow/slideshow-3.jpg" style="width:100%">
+                <div class="text">Caption Three</div>
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/slideshow/slideshow-4.jpg" style="width:100%">
+                <div class="text">Caption Three</div>
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+        </span>
+        <span class="navigation-radio-buttons">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </span>
+
     </section>
 
     <section id="adopt">

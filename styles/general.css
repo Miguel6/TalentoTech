@@ -1,6 +1,119 @@
 @import "colors.css";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap');
+
+.slider-container {
+    width: 100%;
+    height: 100%;
+}
+
+.mySlides {
+    display: none
+}
+
+img {
+    vertical-align: middle;
+    max-height: 90vh;
+    object-fit: cover;
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    color: var(--white);
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 150px;
+}
+
+.prev {
+    left: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+    background-color: var(--white-hover);
+    color: var(--main-color);
+}
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: var(--dot-background-color);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+    background-color: var(--main-color);
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+.navigation-radio-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 5vh;
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+    .prev, .next, .text {
+        font-size: 11px
+    }
+}
+
+
 * {
+    box-sizing: border-box;
     font-family: "Poppins", sans-serif;
     padding: 0;
     margin: 0;
@@ -24,9 +137,10 @@ header {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 11vh;
+    height: 10vh;
     position: sticky;
     top: 0;
+    z-index: 100;
 }
 
 footer {
@@ -80,12 +194,19 @@ header img.logo-image {
     justify-content: center;
 }
 
+#home {
+    height: 90vh;
+}
+
+#adopt, #contactus {
+    height: 100vh;
+}
+
 #home, #adopt, #contactus {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
     justify-content: center;
 }
 
