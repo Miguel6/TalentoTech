@@ -60,11 +60,12 @@ img {
 /* Caption text */
 .text {
     color: #f2f2f2;
-    font-size: 15px;
     position: absolute;
     width: 100%;
     text-align: center;
-    top: 50%;
+    top: 33%;
+    font-size: 7rem;
+    font-weight: bold;
 }
 
 .dot {
