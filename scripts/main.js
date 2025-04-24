@@ -42,3 +42,12 @@ function goToSlide(index) {
     slides[currentSlideIndex].style.display = "block";
     dots[currentSlideIndex].className += " active";
 }
+
+fetch('./pages/adopta.html')
+    .then(response => response.text())
+    .then(html => {
+        document.getElementById('adopt').innerHTML = html;
+    })
+    .catch(error => {
+        console.error('Error cargando el archivo:', error);
+    });
