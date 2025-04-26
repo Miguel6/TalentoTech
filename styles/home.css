@@ -1,0 +1,110 @@
+@import "colors.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap');
+
+.slider-container {
+    width: 100%;
+    height: 100%;
+}
+
+.main-slideshow {
+    display: none
+}
+
+img {
+    vertical-align: middle;
+    height: 90vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    color: var(--white);
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 150px;
+}
+
+.prev {
+    left: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: var(--white-hover);
+    color: var(--main-color);
+}
+
+.text {
+    color: #f2f2f2;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 33%;
+    font-size: 7rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+.dot-selector-slideshow {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: var(--dot-background-color);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot-selector-slideshow:hover {
+    background-color: var(--main-color);
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+.navigation-radio-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 5vh;
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .prev, .next, .text {
+        font-size: 11px
+    }
+}

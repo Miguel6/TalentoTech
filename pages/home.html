@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="./styles/home.css">
+</head>
+<body>
+    <span class="slider-container">
+        <span class="main-slideshow fade">
+            <img src="./images/slideshow/slideshow-1.jpg" alt="Primer Imagen del slideshow">
+            <span class="text">Caption Text</span>
+        </span>
+
+        <span class="main-slideshow fade">
+            <img src="./../images/slideshow/slideshow-2.jpg" alt="Segunda Imagen del slideshow">
+            <span class="text">Caption Two</span>
+        </span>
+
+        <span class="main-slideshow fade">
+            <img src="./../images/slideshow/slideshow-3.jpg" alt="Tercera Imagen del slideshow">
+            <span class="text">Caption Three</span>
+        </span>
+
+        <span class="main-slideshow fade">
+            <img src="./../images/slideshow/slideshow-4.jpg" alt="Cuarta Imagen del slideshow">
+            <span class="text">Caption Three</span>
+        </span>
+        <a class="prev" onclick="prevSlide()">❮</a>
+        <a class="next" onclick="nextSlide()">❯</a>
+    </span>
+    <span class="navigation-radio-buttons">
+        <span class="dot-selector-slideshow" onclick="goToSlide(0)"></span>
+        <span class="dot-selector-slideshow" onclick="goToSlide(1)"></span>
+        <span class="dot-selector-slideshow" onclick="goToSlide(2)"></span>
+        <span class="dot-selector-slideshow" onclick="goToSlide(3)"></span>
+    </span>
+</body>
+</html>
