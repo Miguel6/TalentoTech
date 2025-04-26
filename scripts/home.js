@@ -5,7 +5,7 @@ setTimeout(() => {
     autoIncrementSlide();
     setInterval(() => {
         autoIncrementSlide();
-    }, 5000);
+    }, 500000);
 }, 10)
 
 function autoIncrementSlide() {
