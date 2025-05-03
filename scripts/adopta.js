@@ -16,9 +16,9 @@ fetch('./../jsons/bubble-adopt-pets-response.json')
                 <span class="sphere-image-wrapper">
                   <img src="${pet.image}" alt="Mascota ${pet.name}">
                 </span>
-                <h2>${pet.name}</h2>
+                <h2 class="pet-name">${pet.name}</h2>
                 <h3>${pet.description}</h3>
-                <a href="#">Adoptá</a>`;
+                <a href="#" class="adopt-button">Conocelo</a>`;
             container.appendChild(card);
         });
     })
