@@ -6,7 +6,7 @@ setTimeout(() => {
     setInterval(() => {
         autoIncrementSlide();
     }, 500000);
-}, 100)
+}, 500)
 
 function autoIncrementSlide() {
     goToSlide(currentSlideIndex);
