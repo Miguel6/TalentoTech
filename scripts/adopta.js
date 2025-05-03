@@ -1,6 +1,5 @@
 fetch('./../jsons/bubble-adopt-pets-response.json')
     .then(response => {
-        console.log(response);
         if (!response.ok) {
             throw new Error("No se pudo cargar el archivo JSON");
         }

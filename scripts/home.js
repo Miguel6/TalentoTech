@@ -1,7 +1,6 @@
 let currentSlideIndex = 0;
 
 setTimeout(() => {
-    console.log('Iniciando');
     autoIncrementSlide();
     setInterval(() => {
         autoIncrementSlide();
