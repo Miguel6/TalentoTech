@@ -1,6 +1,13 @@
 @import "colors.css";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap');
 
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+}
+
 .btn-animation {
     color: var(--white);
     transition: all 0.5s;
