@@ -1,5 +1,5 @@
 
-fetch('./pages/adopta.html')
+fetch('./pages/adopt.html')
     .then(response => response.text())
     .then(html => {
         document.getElementById('adopt').innerHTML = html;
