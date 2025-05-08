@@ -16,12 +16,6 @@ img {
     object-fit: cover;
 }
 
-.slideshow-container {
-    max-width: 1000px;
-    position: relative;
-    margin: auto;
-}
-
 .prev, .next {
     cursor: pointer;
     position: absolute;

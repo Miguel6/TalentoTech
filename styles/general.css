@@ -160,8 +160,12 @@ header img.logo-image {
     height: 90vh;
 }
 
-#adopt, #contactus {
+#adopt {
     min-height: 100vh;
+}
+
+#contactus {
+    min-height: calc(100vh - 15vh);
 }
 
 #home, #adopt, #contactus {
@@ -214,3 +218,16 @@ header img.logo-image {
     cursor: pointer;
 }
 
+
+.social-networks {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    position: absolute;
+    left: 1rem;
+}
+
+.social-networks img {
+    width: 24px;
+    height: 24px;
+}
