@@ -11,6 +11,7 @@
     flex: 1;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 #contactus .contact-form form {
@@ -52,6 +53,10 @@
     transition: background-color 250ms linear;
 }
 
+.location iframe {
+    width: 100%;
+}
+
 @media (max-width: 1024px) {
     #contactus {
         display: flex;
@@ -66,3 +71,4 @@
         width: 75%;
     }
 }
+

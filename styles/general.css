@@ -161,7 +161,7 @@ header img.logo-image {
 }
 
 #adopt, #contactus {
-    height: 100vh;
+    min-height: 100vh;
 }
 
 #home, #adopt, #contactus {

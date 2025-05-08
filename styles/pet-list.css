@@ -5,13 +5,11 @@
     overflow-y: auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-auto-rows: 300px;
     gap: 1rem;
     padding: 1rem;
 }
 
 .pet-adoption-card {
-    max-height: 300px;
     box-shadow: 5px 5px 15px var(--lightgray);
     flex-direction: column;
     display: flex;
