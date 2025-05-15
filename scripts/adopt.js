@@ -26,3 +26,16 @@ setTimeout(() => {
             console.error("Error al cargar las mascotas:", error);
         });
 }, 100)
+
+function onMeetThemClick()
+{
+    let baseURL= '';
+    if (window.location.hostname === 'localhost') {
+        baseURL = '/TalentoTech/';
+    } else if (window.location.hostname.includes('netlify.app')) {
+        baseURL = '/';
+    } else {
+        baseURL = '/';
+    }
+    window.open(location.origin + baseURL + '/pages/pet-list.html', '_blank')
+}
