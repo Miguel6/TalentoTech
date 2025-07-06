@@ -1,5 +1,5 @@
 setTimeout(() => {
-    fetch('./../jsons/bubble-adopt-pets-response.json')
+    fetch(CONFIG.PETS_TO_ADOPT_API_URL)
         .then(response => {
             if (!response.ok) {
                 throw new Error("No se pudo cargar el archivo JSON");
@@ -8,8 +8,9 @@ setTimeout(() => {
         })
         .then(pets => {
             const container = document.getElementById("pet-container");
+            const top3 = pets.slice(0, 3);
 
-            pets.forEach(pet => {
+            top3.forEach(pet => {
                 const card = document.createElement("span");
                 card.className = "pet-card";
                 card.innerHTML = `
