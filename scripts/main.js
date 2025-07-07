@@ -18,3 +18,17 @@ fetch('./pages/home.html')
     .catch(error => {
         console.error('Error cargando el archivo:', error);
     });
+
+
+function openShop()
+{
+    let baseURL= '';
+    if (window.location.hostname === 'localhost') {
+        baseURL = '/TalentoTech/';
+    } else if (window.location.hostname.includes('netlify.app')) {
+        baseURL = '/';
+    } else {
+        baseURL = '/';
+    }
+    window.open(location.origin + baseURL + '/pages/shop.html', '_blank')
+}
