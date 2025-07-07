@@ -40,6 +40,7 @@
     display: flex;
     padding: 5px 10px;
     flex-direction: column;
+    min-height: 155px;
 }
 
 .name {
@@ -85,8 +86,8 @@ dialog {
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    max-width: 400px;
-    width: 90%;
+    max-width: 45%;
+    width: 80%;
     text-align: center;
 
     position: fixed !important;
@@ -95,12 +96,16 @@ dialog {
     transform: translate(-50%, -50%) !important;
     margin: 0 !important;
 }
-
+dialog .pet-card-body {
+    display: flex;
+    flex-direction: row;
+}
 dialog::backdrop {
     background: rgba(0, 0, 0, 0.5);
 }
 dialog  strong.description{
     text-transform: capitalize;
+    font-weight: bold;
 }
 #close-dialog {
     display: block;
@@ -111,4 +116,20 @@ dialog  strong.description{
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.pet-card-body .left img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    display: block;
+}
+.pet-card-body .right {
+    width: 100%;
+    text-align: left;
+    margin-left: 1rem;
+}
+
+.pet-card-body .right h2{
+    border-bottom: 1px solid var(--black);
 }
