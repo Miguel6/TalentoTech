@@ -1,3 +1,17 @@
+import {Dialog} from "./dialog.js";
+fetch('./../pages/dialog.html')
+    .then(response => response.text())
+    .then(html => {
+        document.body.insertAdjacentHTML('beforeend', html);
+
+        // Ahora podés usar el dialog
+        const dialog = document.getElementById('pet-dialog');
+        const closeDialog = document.getElementById('close-dialog');
+
+        closeDialog.addEventListener('click', () => dialog.close());
+    })
+    .catch(error => console.error('Error cargando dialog:', error));
+
 setTimeout(() => {
     fetch(CONFIG.PETS_TO_ADOPT_API_URL)
         .then(response => {
@@ -37,30 +51,7 @@ setTimeout(() => {
             <button class="generic-button adopt-pet">Conocelo</button>
           </div>
         `;
-
-                card.querySelector("button").addEventListener("click", () => {
-                    dialogContent.innerHTML = `
-                <div class="pet-card-body">
-                    <div class="left">
-                        <img src="${pet.image}" alt="imagen de ${pet.name}" style="max-width: 200px; border-radius: 8px; margin-bottom: 10px;">
-                    </div>
-                    <div class="right">
-                        <h2>${pet.name}</h2>
-                        <p>${pet.description}</p>
-                        <div style="text-align: left;">
-                          ${pet.characteristics.map(char => `
-                            <div>
-                              <strong class="description">${char.description}:</strong> ${char.value}
-                            </div>
-                          `).join('')}
-                        </div>
-                        <a href="${pet.adoptUrl}" target="_blank">Ver ubicación en Google Maps</a>
-                    </div>
-                </div>
-`;
-                    dialog.showModal();
-                });
-
+                new Dialog().openDialog(card, dialogContent, pet, dialog);
                 container.appendChild(card);
             });
         })
