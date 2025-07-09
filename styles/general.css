@@ -233,3 +233,9 @@ header img.logo-image {
     width: 24px;
     height: 24px;
 }
+
+.one-line{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
