@@ -1,3 +1,19 @@
+import {Dialog} from "./dialog.js";
+document.querySelector('.adoption-list-button').addEventListener('click', onMeetThemClick);
+
+fetch('./../pages/dialog.html')
+    .then(response => response.text())
+    .then(html => {
+        document.body.insertAdjacentHTML('beforeend', html);
+
+        const dialog = document.getElementById('pet-dialog');
+        const closeDialog = document.getElementById('close-dialog');
+
+        closeDialog.addEventListener('click', () => dialog.close());
+    })
+    .catch(error => console.error('Error cargando dialog:', error));
+
+
 setTimeout(() => {
     fetch(CONFIG.PETS_TO_ADOPT_API_URL)
         .then(response => {
@@ -10,6 +26,11 @@ setTimeout(() => {
             const container = document.getElementById("pet-container");
             const top3 = pets.slice(0, 3);
 
+            const dialog = document.getElementById("pet-dialog");
+            const dialogContent = document.getElementById("dialog-content");
+            const closeDialog = document.getElementById("close-dialog");
+            closeDialog.addEventListener("click", () => dialog.close());
+
             top3.forEach(pet => {
                 const card = document.createElement("span");
                 card.className = "pet-card";
@@ -20,6 +41,8 @@ setTimeout(() => {
                 <h2 class="pet-name">${pet.name}</h2>
                 <h3>${pet.description}</h3>
                 <button class="generic-button meet-him-button">Conocelo</a>`;
+
+                new Dialog().openDialog(card, dialogContent, pet, dialog);
                 container.appendChild(card);
             });
         })

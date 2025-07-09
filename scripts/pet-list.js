@@ -1,10 +1,10 @@
 import {Dialog} from "./dialog.js";
+
 fetch('./../pages/dialog.html')
     .then(response => response.text())
     .then(html => {
         document.body.insertAdjacentHTML('beforeend', html);
 
-        // Ahora podés usar el dialog
         const dialog = document.getElementById('pet-dialog');
         const closeDialog = document.getElementById('close-dialog');
 
