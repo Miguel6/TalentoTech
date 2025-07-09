@@ -1,3 +1,6 @@
+let productList = [];
+let cartContainer;
+
 setTimeout(() => {
     fetch(CONFIG.PRODUCTS_API_URL)
         .then(response => {
@@ -7,6 +10,7 @@ setTimeout(() => {
             return response.json();
         })
         .then(products => {
+            productList = products;
             const container = document.getElementById("product-container");
 
             products.forEach(product => {
@@ -26,7 +30,7 @@ setTimeout(() => {
                 <div class="price">Precio: ${formattedPrice}</div>
             </span>
             
-            <button class="generic-button add-button">Agregar</button>
+            <button class="generic-button add-button" onclick="addToCart(${product.id})">Agregar</button>
           </div>
         `;
                 container.appendChild(card);
@@ -35,4 +39,41 @@ setTimeout(() => {
         .catch(error => {
             console.error("Error al cargar los productos:", error);
         });
+
+    cartContainer = document.getElementById('cart');
+    renderCart();
 }, 100);
+
+
+function renderCart() {
+    const cart = getCart();
+    cartContainer.innerHTML = '';
+    if (cart.length === 0) {
+        cartContainer.innerHTML = '<p>Carrito vacío.</p>';
+    } else {
+        cart.forEach(item => {
+            const div = document.createElement('div');
+            div.textContent = `${item.name} - $${item.price}`;
+            cartContainer.appendChild(div);
+        });
+    }
+}
+
+function getCart() {
+    const cart = sessionStorage.getItem('cart');
+    return cart ? JSON.parse(cart) : [];
+}
+
+function saveCart(cart) {
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function addToCart(productId) {
+    const product = productList.find(p => p.id == productId);
+    const cart = getCart();
+    cart.push(product);
+    saveCart(cart);
+    renderCart();
+}
+
+

@@ -239,3 +239,9 @@ header img.logo-image {
     flex-direction: row;
     justify-content: space-between;
 }
+
+.separator{
+    width: 1px;
+    background-color: var(--lightgray);
+    margin: 5px
+}
