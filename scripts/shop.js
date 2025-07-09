@@ -62,21 +62,45 @@ function renderCart() {
             card.className = 'cart-item-card';
 
             const formattedPrice = item.price.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' });
+            const itemSubtotal = (item.price * item.quantity).toLocaleString('es-AR', { style: 'currency', currency: 'ARS' });
 
             card.innerHTML = `
-                <div class="cart-item-image">
-                    <img src="${item.urlImage}" alt="${item.name}" />
+        <div class="cart-item-image">
+            <img src="${item.urlImage}" alt="${item.name}" />
+        </div>
+        <div class="cart-item-info">
+            <div class="name">${item.name}</div>
+            <div class="description">${item.description}</div>
+            <span class="one-line">
+                <div class="price">P.U.: ${formattedPrice}</div>
+                <div class="quantity-container">
+                    <span>Cantidad:</span>
+                    <button class="decrease-button" data-index="${index}">-</button>
+                    <span class="quantity">${item.quantity}</span>
+                    <button class="increase-button" data-index="${index}">+</button>
                 </div>
-                <div class="cart-item-info">
-                    <div class="name">${item.name}</div>
-                    <div class="description">${item.description}</div>
-                    <div class="price">Precio: ${formattedPrice}</div>
-                    <div class="quantity">Cantidad: 1</div>
-                    <button class="remove-button" data-index="${index}">Eliminar</button>
-                </div>
-            `;
+            </span>
+            
+            <div class="item-subtotal">Subtotal: ${itemSubtotal}</div>
+            <button class="remove-button" data-index="${index}">Eliminar</button>
+        </div>
+    `;
 
             cartContainer.appendChild(card);
+        });
+
+        document.querySelectorAll('.increase-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.target.getAttribute('data-index');
+                increaseQuantity(index);
+            });
+        });
+
+        document.querySelectorAll('.decrease-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.target.getAttribute('data-index');
+                decreaseQuantity(index);
+            });
         });
 
         document.querySelectorAll('.remove-button').forEach(button => {
@@ -88,6 +112,22 @@ function renderCart() {
     }
 
     updateTotals();
+}
+
+function increaseQuantity(index) {
+    const cart = getCart();
+    cart[index].quantity += 1;
+    saveCart(cart);
+    renderCart();
+}
+
+function decreaseQuantity(index) {
+    const cart = getCart();
+    if (cart[index].quantity > 1) {
+        cart[index].quantity -= 1;
+        saveCart(cart);
+        renderCart();
+    }
 }
 
 function removeFromCart(index) {
@@ -108,21 +148,30 @@ function saveCart(cart) {
 
 function addToCart(productId) {
     const product = productList.find(p => p.id == productId);
-    const updatedCart = getCart();
-    updatedCart.push(product);
+    let updatedCart = getCart();
+
+    const existingItem = updatedCart.find(item => item.id === product.id);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        updatedCart.push({
+            ...product,
+            quantity: 1
+        });
+    }
+
     saveCart(updatedCart);
     renderCart();
 }
-
-
 function updateTotals() {
-    subtotal = currentCart.reduce((acc, item) => acc + item.price, 0);
+    subtotal = currentCart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     discount = subtotal >= CONFIG.DISCOUNT_LIMIT ? subtotal * (CONFIG.DISCOUNT_PERCENTAGE / 100) : 0;
     total = subtotal - discount;
 
-    const formattedSubtotal = subtotal.toLocaleString('es-AR', {style: 'currency', currency: 'ARS'});
-    const formattedDiscount = discount.toLocaleString('es-AR', {style: 'currency', currency: 'ARS'});
-    const formattedTotal = total.toLocaleString('es-AR', {style: 'currency', currency: 'ARS'});
+    const formattedSubtotal = subtotal.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' });
+    const formattedDiscount = discount.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' });
+    const formattedTotal = total.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' });
 
     document.getElementById('subtotal-value').textContent = formattedSubtotal;
     document.getElementById('discount-value').textContent = formattedDiscount;
