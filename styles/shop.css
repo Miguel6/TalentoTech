@@ -34,7 +34,7 @@
     overflow-y: auto;
 }
 
-.subtotal, .discount, .total {
+.subtotal, .discount, .total, .quantity {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -48,6 +48,7 @@
 .checkout-button{
     width: 100%;
     margin: 10px 0;
+    background: var(--green);
 }
 
 .checkout-button:disabled {

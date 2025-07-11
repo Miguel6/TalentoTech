@@ -4,6 +4,7 @@ let cartContainer;
 let subtotal = 0;
 let discount = 0;
 let total = 0;
+let quantity = 0;
 
 setTimeout(() => {
     fetch(CONFIG.PRODUCTS_API_URL)
@@ -168,6 +169,7 @@ function updateTotals() {
     subtotal = currentCart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     discount = subtotal >= CONFIG.DISCOUNT_LIMIT ? subtotal * (CONFIG.DISCOUNT_PERCENTAGE / 100) : 0;
     total = subtotal - discount;
+    quantity = currentCart.reduce((acc, item) => acc + item.quantity, 0)
 
     const formattedSubtotal = subtotal.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' });
     const formattedDiscount = discount.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' });
@@ -176,6 +178,7 @@ function updateTotals() {
     document.getElementById('subtotal-value').textContent = formattedSubtotal;
     document.getElementById('discount-value').textContent = formattedDiscount;
     document.getElementById('total-value').textContent = formattedTotal;
+    document.getElementById('quantity-value').textContent = quantity;
 
     const checkoutButton = document.getElementById('checkout-button');
     if (checkoutButton) {
