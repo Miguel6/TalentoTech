@@ -51,6 +51,10 @@
     background: var(--green);
 }
 
+.checkout-button:hover {
+    background: var(--green-hover);
+}
+
 .checkout-button:disabled {
     opacity: 0.5;
     background: var(--gray);
