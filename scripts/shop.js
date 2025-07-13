@@ -6,26 +6,52 @@ let discount = 0;
 let total = 0;
 let quantity = 0;
 
+function applyFiltersAndSort() {
+    const searchTerm = document.getElementById('input-search').value.toLowerCase();
+    const sortValue = document.getElementById('sort-select').value;
+
+    let filtered = productList.filter(p =>
+        p.name.toLowerCase().includes(searchTerm) ||
+        p.description.toLowerCase().includes(searchTerm)
+    );
+
+    switch (sortValue) {
+        case 'price-asc':
+            filtered.sort((a, b) => a.price - b.price);
+            break;
+        case 'price-desc':
+            filtered.sort((a, b) => b.price - a.price);
+            break;
+        case 'name-asc':
+            filtered.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+        case 'name-desc':
+            filtered.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+    }
+
+    renderProductList(filtered);
+}
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('input-search');
     const clearSearch = document.getElementById('clear-search');
 
     searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
         clearSearch.style.display = searchTerm ? 'inline' : 'none';
-
-        const filtered = productList.filter(p =>
-            p.name.toLowerCase().includes(searchTerm) ||
-            p.description.toLowerCase().includes(searchTerm)
-        );
-
-        renderProductList(filtered);
+        applyFiltersAndSort();
     });
 
     clearSearch.addEventListener('click', () => {
         searchInput.value = '';
         clearSearch.style.display = 'none';
-        renderProductList(productList);
+        applyFiltersAndSort();
+    });
+
+    document.getElementById('sort-select').addEventListener('change', () => {
+        applyFiltersAndSort();
     });
 });
 
@@ -50,6 +76,7 @@ function renderProductList(products) {
           <div class="description-card-container">
             <div class="name">${product.name}</div>
             <div class="description">${product.description}</div>
+            <div class="reviews">${generateStars(product.rating)} (${product.reviews})</div>
             <span class="one-line">
                 <div class="stock">Stock: ${product.stock}</div>
                 <div class="price">Precio: ${formattedPrice}</div>
@@ -60,6 +87,27 @@ function renderProductList(products) {
 
         container.appendChild(card);
     });
+}
+
+function generateStars(rating) {
+    const maxStars = 5;
+    let decimal = rating % 1;
+    let hasDecimal = rating % 1 != 0;
+    let fullStars = rating - decimal;
+    let emptyStars = maxStars - fullStars - (hasDecimal ? 1 : 0)
+    let starsHTML = '';
+
+    for (let i = 0; i < fullStars; i++) {
+        starsHTML += '<img src="./../icons/full-star.svg" alt="Estrella llena">\n';
+    }
+    if(hasDecimal) {
+        starsHTML += '<img src="./../icons/half-star.svg" alt="Media Estrella">\n';
+    }
+    for (let i = 0; i < emptyStars; i++) {
+        starsHTML += '<img src="./../icons/empty-star.svg" alt="Estrella vacia">\n';
+    }
+
+    return starsHTML;
 }
 
 setTimeout(() => {
@@ -95,8 +143,11 @@ function renderCart() {
             const card = document.createElement('div');
             card.className = 'cart-item-card';
 
-            const formattedPrice = item.price.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' });
-            const itemSubtotal = (item.price * item.quantity).toLocaleString('es-AR', { style: 'currency', currency: 'ARS' });
+            const formattedPrice = item.price.toLocaleString('es-AR', {style: 'currency', currency: 'ARS'});
+            const itemSubtotal = (item.price * item.quantity).toLocaleString('es-AR', {
+                style: 'currency',
+                currency: 'ARS'
+            });
 
             card.innerHTML = `
         <div class="cart-item-image">
@@ -205,9 +256,9 @@ function updateTotals() {
     total = subtotal - discount;
     quantity = currentCart.reduce((acc, item) => acc + item.quantity, 0)
 
-    const formattedSubtotal = subtotal.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' });
-    const formattedDiscount = discount.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' });
-    const formattedTotal = total.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' });
+    const formattedSubtotal = subtotal.toLocaleString('es-AR', {style: 'currency', currency: 'ARS'});
+    const formattedDiscount = discount.toLocaleString('es-AR', {style: 'currency', currency: 'ARS'});
+    const formattedTotal = total.toLocaleString('es-AR', {style: 'currency', currency: 'ARS'});
 
     document.getElementById('subtotal-value').textContent = formattedSubtotal;
     document.getElementById('discount-value').textContent = formattedDiscount;

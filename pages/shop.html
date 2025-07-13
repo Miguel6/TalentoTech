@@ -23,10 +23,23 @@
 
 <main class="main-content">
 
-    <div class="search-wrapper">
-        <input type="text" id="input-search" placeholder="Ingrese el nombre o descripción de un producto para buscar..." class="input-search">
-        <span id="clear-search" class="clear-button">&times;</span>
+    <div class="search-and-filter-wrapper">
+        <div class="search-wrapper">
+            <input type="text" id="input-search" placeholder="Ingrese el nombre o descripción de un producto para buscar..." class="input-search">
+            <span id="clear-search" class="clear-button">&times;</span>
+        </div>
+        <div class="filter-wrapper">
+            <label for="sort-select">Ordenar por:</label>
+            <select id="sort-select">
+                <option value="default">-- Seleccionar --</option>
+                <option value="price-asc">Precio: menor a mayor</option>
+                <option value="price-desc">Precio: mayor a menor</option>
+                <option value="name-asc">Nombre A-Z</option>
+                <option value="name-desc">Nombre Z-A</option>
+            </select>
+        </div>
     </div>
+
     <div class="product-list" id="product-container"></div>
     <div class="separator"></div>
     <div class="cart">
