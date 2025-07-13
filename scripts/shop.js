@@ -6,24 +6,44 @@ let discount = 0;
 let total = 0;
 let quantity = 0;
 
-setTimeout(() => {
-    fetch(CONFIG.PRODUCTS_API_URL)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("No se pudo cargar el archivo JSON");
-            }
-            return response.json();
-        })
-        .then(products => {
-            productList = products;
-            const container = document.getElementById("product-container");
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('input-search');
+    const clearSearch = document.getElementById('clear-search');
 
-            products.forEach(product => {
-                const card = document.createElement("div");
-                const formattedPrice = product.price.toLocaleString('es-AR', {style: 'currency', currency: 'ARS'});
-                card.className = "product-card";
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        clearSearch.style.display = searchTerm ? 'inline' : 'none';
 
-                card.innerHTML = `
+        const filtered = productList.filter(p =>
+            p.name.toLowerCase().includes(searchTerm) ||
+            p.description.toLowerCase().includes(searchTerm)
+        );
+
+        renderProductList(filtered);
+    });
+
+    clearSearch.addEventListener('click', () => {
+        searchInput.value = '';
+        clearSearch.style.display = 'none';
+        renderProductList(productList);
+    });
+});
+
+function renderProductList(products) {
+    const container = document.getElementById("product-container");
+    container.innerHTML = '';
+
+    if (products.length === 0) {
+        container.innerHTML = '<p class="empty-list">No se encontraron productos.</p>';
+        return;
+    }
+
+    products.forEach(product => {
+        const card = document.createElement("div");
+        const formattedPrice = product.price.toLocaleString('es-AR', {style: 'currency', currency: 'ARS'});
+        card.className = "product-card";
+
+        card.innerHTML = `
           <div class="image-profile-container">
             <img src="${product.urlImage}" alt="imagen de perfil de ${product.name}" class="logo-image">
           </div>
@@ -34,12 +54,25 @@ setTimeout(() => {
                 <div class="stock">Stock: ${product.stock}</div>
                 <div class="price">Precio: ${formattedPrice}</div>
             </span>
-            
             <button class="generic-button add-button" onclick="addToCart(${product.id})">Agregar</button>
           </div>
         `;
-                container.appendChild(card);
-            });
+
+        container.appendChild(card);
+    });
+}
+
+setTimeout(() => {
+    fetch(CONFIG.PRODUCTS_API_URL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("No se pudo cargar el archivo JSON");
+            }
+            return response.json();
+        })
+        .then(products => {
+            productList = products;
+            renderProductList(productList);
         })
         .catch(error => {
             console.error("Error al cargar los productos:", error);
@@ -165,6 +198,7 @@ function addToCart(productId) {
     saveCart(updatedCart);
     renderCart();
 }
+
 function updateTotals() {
     subtotal = currentCart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     discount = subtotal >= CONFIG.DISCOUNT_LIMIT ? subtotal * (CONFIG.DISCOUNT_PERCENTAGE / 100) : 0;
