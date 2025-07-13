@@ -38,6 +38,7 @@ function applyFiltersAndSort() {
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('input-search');
     const clearSearch = document.getElementById('clear-search');
+    const searchTerm = document.getElementById('input-search').value.toLowerCase();
 
     searchInput.addEventListener('input', () => {
         clearSearch.style.display = searchTerm ? 'inline' : 'none';
